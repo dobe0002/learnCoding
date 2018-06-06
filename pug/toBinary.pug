@@ -1,0 +1,49 @@
+extends templates/main.pug
+
+block title
+    .
+        To Binary
+
+
+block head
+
+block contentContainer
+
+    .container
+        .row
+            .col
+                h1 To Binary
+
+        .row
+            .col
+                .form-group
+                    label(for="enterString") Enter text
+                    input#enterString.form-control(type="text")
+                button#convert.form-control.btn.btn-primary Convert to Binary
+
+        .row
+            .col
+                #output
+
+        .row#pattern
+        
+                
+block extraCode
+    script(src='assets/javascript/toBinary.js')
+    script.
+        $('#convert').click(()=>{
+            let binary = stringToBinary($('#enterString').val().trim());
+            $('#output').html(binary)
+
+            let binaryArray = binary.split('');
+            binaryArray.pop();
+            let html="<div class='col'>";
+            binaryArray.forEach((item)=>{
+                if( item=='1') html+="<div class='on'></div>"
+                else if(item=='0') html+="<div class='off'></div>";
+                else html+="</div><div class='col'>"
+            })
+            html+="</div>"
+            $('#pattern').html(html)
+
+        })

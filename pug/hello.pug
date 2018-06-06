@@ -1,0 +1,56 @@
+extends templates/main.pug
+
+block title
+    .
+        Hello
+
+
+block head
+    style.
+        #output{
+            font-weight:bold;
+            font-size:6em;
+        }
+
+block contentContainer
+
+    .container
+        .row
+            .col
+                h1.sr-only Hello
+        .row
+            .col
+                .form-group
+                    label(for="message") Message
+                    input#message(type="text")
+
+                .form-group
+                    label(for="time") Time between letters (in seconds)
+                    input#time(type="text")
+                
+                .form-group
+                    label(for="color") Color
+                    input#color(type="text")
+
+        .row
+            .col
+                button#run.form-control.btn.btn-primary Run program
+            .col
+                a.btn.btn-default(href="assets/javascript/hello.js" target="_bank") View Code
+        hr
+        .row
+            .col
+                #output
+
+        
+                
+block extraCode
+    script(src="assets/javascript/hello.js")
+
+    script.
+        //msg,t,c
+        $('#run').click(()=>{
+            $('#output').html('')
+            hello($('#output'),$('#message').val(), $('#time').val(), $('#color').val());
+        })
+    
